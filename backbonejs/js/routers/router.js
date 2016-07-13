@@ -28,7 +28,13 @@ var app = app || {};
                 collection: contact
             });
 
+            app.items = contact.length;
+
             AppView.render();
+
+            var FormView = new app.FormView({
+                collection: contact
+            })
         }
     });
 
