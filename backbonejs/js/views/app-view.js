@@ -4,7 +4,7 @@ var app = app || {};
     'use strict';
 
     app.AppView = Backbone.View.extend({
-        el: 'tbody',
+        el: 'body',
         type: 'localStorage',
 
         initialize: function() {
@@ -15,7 +15,7 @@ var app = app || {};
             var element = $(this.el);
             var items = this.collection.length;
 
-            element.empty();
+            element.find("tbody").empty();
 
             // Go through the collection items
             this.collection.forEach(function(item) {
@@ -27,7 +27,8 @@ var app = app || {};
 
                 // Render the PeopleView, and append its element
                 // to the table
-                element.append(contactView.render().el);
+                element.find("tbody").append(contactView.render().el);
+                element.find(".items").text(items);
             });
 
             return this;
@@ -35,7 +36,7 @@ var app = app || {};
 
         addOne: function(contact) {
             var contacts = new app.ContactView({ model: contact });
-            this.$el.append(contacts.render().el);
+            this.render();
         }
     });
 
@@ -75,8 +76,6 @@ var app = app || {};
                 });
             // this.collection.add({model: contact});
             this.collection.add(contact);
-
-            this.$el.find('.items').text(this.collection.length);
         }
     });
 })();
